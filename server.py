@@ -3,8 +3,8 @@
 COSAS QUE HACER
 
 -- obtener datos del dataset
--que anio/mes fue el mas caro y cual el mas barato
--promedio anual del precio
+- que anio/mes fue el mas caro y cual el mas barato
+-- promedio anual del precio
 un grafico de como varia el precio
 - verificar que los datos ingresados son validos
 CRUD:
@@ -102,6 +102,7 @@ def comparar(lista, comparador):#ver si se puede hacer con un reduce
 		#error el comparador no es valido
 		pass
 
+
 def promedio_anual(anio):
 	#calcula el promedio anual
 	#usa lista precio
@@ -112,12 +113,11 @@ def promedio_anual(anio):
 		pre=lista_t_p[i][2]
 		if anio==a:
 			t_pre+=pre
-	return t_pre/12
+	return t_pre/12 #devuelve el precio promedio que tuvo en un anio
 	
 
 def verificar_datos(datos):
 	#verifica que los datos ingresados sean validos
-	pass
 	#datos que tiene:
 	#Pais_id Pais Anio Mes ccpa Producto Precio_promedio_Kg Moneda_id
 	if datos['pais']!='Argentina':
