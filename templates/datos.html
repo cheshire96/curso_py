@@ -1,0 +1,31 @@
+<!doctype html>
+<title>Datos</title>
+<table id="ghatable" class="display table table-bordered table-stripe" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Pais_id</th>
+			<th>Pais</th>
+			<th>Anio</th>
+			<th>Mes</th>
+			<th>ccpa</th>
+			<th>Producto</th>
+			<th>Precio_promedio_Kg</th>
+			<th>Moneda_id</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		{% for a in range(1,74) %}
+			<tr>
+				<td>{{ l[0][a] }}</td>
+				<td>{{ l[1][a] }}</td>
+				<td>{{ l[2][a] }}</td>
+				<td>{{ l[3][a] }}</td>
+				<td>{{ l[4][a] }}</td>
+				<td>{{ l[5][a] }}</td>
+				<td>{{ l[6][a] }}</td>
+				<td>{{ l[7][a] }}</td>
+			</tr>
+		{% endfor %}	
+	</tbody>
+</table>
