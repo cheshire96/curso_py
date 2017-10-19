@@ -55,10 +55,15 @@ def obtener_datos():
 	df = pd.read_csv("precio-promedio-por-litro-de-leche.csv",encoding = "ISO-8859-1",sep=';', header=None)
 	return df
 	
-@app.route('/datos')
-def mostrar_datos():
-	datos=obtener_datos()
-	return render_template('datos.html', l=datos)#retorna un template que muestra el listado completo de los datos
+@app.route('/datos', methods=['GET', 'POST'])
+def datos():
+	if request.method == 'GET':
+		datos=obtener_datos()
+		return render_template('datos.html', l=datos)#retorna un template que muestra el listado completo de los datos
+	elif request.method == 'POST':
+		return 'POST'
+	else:
+		pass
 		
 def comparar(lista, comparador):#ver si se puede hacer con un reduce
 	#ejemplo:  reduce(comparar, lista)
