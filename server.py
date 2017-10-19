@@ -6,7 +6,7 @@ COSAS QUE HACER
 que anio/mes fue el mas caro y cual el mas barato
 promedio anual del precio
 un grafico de como varia el precio
-verificar que los datos ingresados son validos
+- verificar que los datos ingresados son validos
 CRUD:
 --	mostrar todos los datos
 	ingresar nuevo mes y año mientras no sea superior al actual
@@ -18,7 +18,9 @@ ordenar los datos por anio y mes
 buscar todos los datos de un anio()
 comparar anualmente en x mes(ejemplo: cuanto valio en el mes 2 en todos los anios)
 
-Nota: lo que tiene las dos rayitas adelante ya esta
+
+Nota: lo que tiene las dos rayitas adelante ya esta. lo que tiene una rayita adelante esta a medias
+
 
 OPCIONAL
 guardar en una base:
@@ -35,6 +37,9 @@ from flask import render_template
 
 import pandas as pd
 import numpy as np
+import datetime
+
+
 app = Flask(__name__)
 
 '''
@@ -61,9 +66,21 @@ def datos():
 		datos=obtener_datos()
 		return render_template('datos.html', l=datos)#retorna un template que muestra el listado completo de los datos
 	elif request.method == 'POST':
-		return 'POST'
+		
+		mensaje=verificar_datos(request.form)
+		if mensaje=='ok':
+			return 'Todo ok'
+		else:
+			return mensaje
 	else:
-		pass
+		return 'Metodo no soportado'
+@app.route('/formulario', methods=['GET', 'POST'])
+def formulario():
+	if request.method == 'GET':
+		datos=obtener_datos()
+		return render_template('formulario.html')#retorna un template con un formulario
+		
+
 		
 def comparar(lista, comparador):#ver si se puede hacer con un reduce
 	#ejemplo:  reduce(comparar, lista)
@@ -85,9 +102,23 @@ def promedio_anual(meses):
 	#primero se fija si hay 12 elementos en la lista, si no hay devuelve un error
 	#suma los meses y despues los divide por 12
 
-def verificar_datos():
+def verificar_datos(datos):
 	#verifica que los datos ingresados sean validos
 	pass
+	#datos que tiene:
+	#Pais_id Pais Anio Mes ccpa Producto Precio_promedio_Kg Moneda_id
+	if datos['pais']!='Argentina':
+		return 'El pais no es valido'
+		
+	if datos['producto']!='Leche cruda':
+		return 'El producto no es valido'
+
+	x = datetime.datetime.now()
+	if int(datos['anio'])>x.year:
+		return 'El anio ingresado no es valido'
+	if int(datos['mes'])>x.month:
+		return 'El mes ingresado no es valido'
+		
 
 def graficar(lista):
 	#grafica como varia el precio. Puede ser tanto anual como periodicamente(?????????)
