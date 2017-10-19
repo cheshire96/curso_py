@@ -1,13 +1,24 @@
 '''
+
 COSAS QUE HACER
 
+-- obtener datos del dataset
 que anio/mes fue el mas caro y cual el mas barato
 promedio anual del precio
-ingresar nuevo mes y año mientras no sea superior al actual
-modificar algun precio o dato
-eliminar
 un grafico de como varia el precio
 verificar que los datos ingresados son validos
+CRUD:
+--	mostrar todos los datos
+	ingresar nuevo mes y año mientras no sea superior al actual
+	modificar algun precio o dato
+	eliminar
+
+
+ordenar los datos por anio y mes
+buscar todos los datos de un anio()
+comparar anualmente en x mes(ejemplo: cuanto valio en el mes 2 en todos los anios)
+
+Nota: lo que tiene las dos rayitas adelante ya esta
 
 OPCIONAL
 guardar en una base:
@@ -38,13 +49,15 @@ def persona():
 	else:
 		return 'GET'
 '''
-@app.route('/prueba')
+@app.route('/datos')
 def obtener_datos():
 	#obtiene los valores del archivo csv
-	df_txt = pd.read_csv("precio-promedio-por-litro-de-leche.csv",encoding = "ISO-8859-1",sep=';', header=None)
-	return 'hola(???????)'#ver como retornar los datos
-
-def comparar(lista, comparador):
+	df = pd.read_csv("precio-promedio-por-litro-de-leche.csv",encoding = "ISO-8859-1",sep=';', header=None)
+	return render_template('datos.html', l=df)#retorna un template que muestra el listado completo de los datos
+	
+def comparar(lista, comparador):#ver si se puede hacer con un reduce
+	#ejemplo:  reduce(comparar, lista)
+	
 	#compara cual mes/anio es el menor o mayor
 	if(comparador=='mayor'):
 		#recorre la lista y busca cual es el mayor
