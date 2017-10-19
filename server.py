@@ -49,12 +49,17 @@ def persona():
 	else:
 		return 'GET'
 '''
-@app.route('/datos')
+
 def obtener_datos():
 	#obtiene los valores del archivo csv
 	df = pd.read_csv("precio-promedio-por-litro-de-leche.csv",encoding = "ISO-8859-1",sep=';', header=None)
-	return render_template('datos.html', l=df)#retorna un template que muestra el listado completo de los datos
+	return df
 	
+@app.route('/datos')
+def mostrar_datos():
+	datos=obtener_datos()
+	return render_template('datos.html', l=datos)#retorna un template que muestra el listado completo de los datos
+		
 def comparar(lista, comparador):#ver si se puede hacer con un reduce
 	#ejemplo:  reduce(comparar, lista)
 	
