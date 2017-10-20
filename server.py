@@ -1,11 +1,9 @@
 '''
-
 COSAS QUE HACER
 
 -- obtener datos del dataset
 -- que mes fue el mas caro y cual el mas barato
 -- promedio anual del precio
-un grafico de como varia el precio
 - verificar que los datos ingresados son validos
 CRUD:
 --	mostrar todos los datos
@@ -15,19 +13,9 @@ CRUD:
 
 
 ordenar los datos por anio y mes
--- buscar todos los datos de un anio()
-comparar anualmente en x mes(ejemplo: cuanto valio en el mes 2 en todos los anios)
-
+-- buscar todos los datos de un producto()
 
 Nota: lo que tiene las dos rayitas adelante ya esta. lo que tiene una rayita adelante esta a medias
-
-
-OPCIONAL
-guardar en una base:
-	se tiene 3 entidades(????)
-	el pais(pais_id,pais)
-	producto(año,mes,ccpa[es como un codigo],producto,precio_promedio_kg)
-	moneda(moneda_id)
 
 '''
 
@@ -38,10 +26,10 @@ from decimal import Decimal
 import pandas as pd
 import numpy as np
 import datetime
+import matplotlib.pyplot as plt
 
 
 app = Flask(__name__)
-
 
 def obtener_datos():
 	#obtiene los valores del archivo csv
@@ -108,8 +96,9 @@ def formulario():
 		return render_template('formulario.html')#retorna un template con un formulario
 	if request.method == 'POST':
 		#precios=promedio_anual(2016)
-		precios=comparar(2016,'menor')
-		print (precios) 
+		#precios=comparar(2016,'menor')
+		#print (precios) 
+		return graficar()
 		
 def comparar(anio,comparador):
 	#compara cual mes/anio es el menor o mayor
@@ -170,8 +159,4 @@ def verificar_datos(datos):
 		return 'El anio ingresado no es valido'
 	if int(datos['mes'])>x.month:
 		return 'El mes ingresado no es valido'
-		
-
-def graficar(datos):
-	#grafica como varia el precio. Puede ser tanto anual como periodicamente(?????????)
-	pass
+	
